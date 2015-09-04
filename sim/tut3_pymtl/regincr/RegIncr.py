@@ -35,4 +35,12 @@ class RegIncr( Model ):
     # later you will a line tracing function to compactly output the
     # input, register, and output vaules.
     # '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    
+    # Concurrent block modeling incrementer
 
+    @s.combinational
+    def block2():
+      s.out.value = s.reg_out + 1
+
+  def print_line_trace( s, cycle ):
+    print "{}: in:{} ({}) out:{}".format(cycle, s.in_, s.reg_out, s.out )

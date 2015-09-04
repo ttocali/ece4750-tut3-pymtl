@@ -22,6 +22,56 @@ input_values.extend( [0]*3 )
 # tutorial you will nee to add a line to enable VCD dumping.
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
+# #===============================================================================
+# # RegIncr
+# #===============================================================================
+# # THis is a simple model for a registered incrementer. An eight-bit value is 
+# # read from the input port, registered, incremembted by one, and finally written
+# # to the output port
+
+# class RegIncr( Model ):
+#   #Constructor 
+#   def __init__( s ):
+#     #Port-based interface
+#     s.in_ = InPort ( Bits(8) )
+#     s.out = OutPort( Bits(8) )
+
+#     #Concurrent block modeling register
+#     s.reg_out = Wire( Bits(8) )
+
+#     @a.Tick
+#     def block1():
+#       if s.reset:
+#         s.reg_out.next = 0
+#       else:
+#         s.reg_out.next = s.in_
+
+#     #Concurrent block modeling incrementer
+#     @s.combinational
+#     def block2():
+#       s.out.value = s.reg_out + 1
+
+#===============================================================================
+# regincr-sim <input-values>
+#===============================================================================
+
+# Get list of input values from command line
+
+input_values = [ int(x, 0) for x in argv[1:] ]
+
+# Add three zero values to end of list of input values
+
+input_values.extend( [0]*3 )
+
+# Elaborate the model
+
+model = RegIncr()
+model.elaborate()
+
+# Create simulator
+ 
+sim = SimulationTool( model )
+
 # Reset simulator
 
 sim.reset()
@@ -40,8 +90,10 @@ for input_value in input_values:
   # replace this with a call to the simulator's print_line_trace method.
   # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-  print " cycle = {}: in = {}, out = {}" \
-    .format( sim.ncycles, model.in_, model.out )
+  # print " cycle = {}: in = {}, out = {}" \
+  #   .format( sim.ncycles, model.in_, model.out )
+
+  model.print_line_trace(sim.ncycles)
 
   # Tick simulator one cycle
 
