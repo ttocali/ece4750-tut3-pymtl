@@ -22,35 +22,6 @@ input_values.extend( [0]*3 )
 # tutorial you will nee to add a line to enable VCD dumping.
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-# #===============================================================================
-# # RegIncr
-# #===============================================================================
-# # THis is a simple model for a registered incrementer. An eight-bit value is 
-# # read from the input port, registered, incremembted by one, and finally written
-# # to the output port
-
-# class RegIncr( Model ):
-#   #Constructor 
-#   def __init__( s ):
-#     #Port-based interface
-#     s.in_ = InPort ( Bits(8) )
-#     s.out = OutPort( Bits(8) )
-
-#     #Concurrent block modeling register
-#     s.reg_out = Wire( Bits(8) )
-
-#     @a.Tick
-#     def block1():
-#       if s.reset:
-#         s.reg_out.next = 0
-#       else:
-#         s.reg_out.next = s.in_
-
-#     #Concurrent block modeling incrementer
-#     @s.combinational
-#     def block2():
-#       s.out.value = s.reg_out + 1
-
 #===============================================================================
 # regincr-sim <input-values>
 #===============================================================================
@@ -66,6 +37,7 @@ input_values.extend( [0]*3 )
 # Elaborate the model
 
 model = RegIncr()
+model.vcd_file = "regincr-sim.vcd"
 model.elaborate()
 
 # Create simulator
