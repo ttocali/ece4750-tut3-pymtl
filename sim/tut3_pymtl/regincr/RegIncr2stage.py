@@ -37,7 +37,7 @@ class RegIncr2stage( Model ):
     return "{} ({}|{}) {}".format(
       s.in_,
       s.reg_incr_0.line_trace(),
-      s.reg_incr_1.line_trace(),
+      # s.reg_incr_1.line_trace(),
       s.out
     )
 
